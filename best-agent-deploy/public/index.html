@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BEST LinkedIn Agent</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#07090f;color:#dde6f0;font-family:Georgia,serif;min-height:100vh}
+.app{max-width:680px;margin:0 auto;padding:1.25rem}
+.card{background:#0d1118;border-radius:12px;border:.5px solid #1a2438;padding:1.25rem;margin-bottom:12px}
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:.5px solid #1a2438}
+.tabs{display:flex;background:#0d1118;border-radius:10px;border:.5px solid #1a2438;overflow:hidden;margin-bottom:1.25rem}
+.tab{flex:1;padding:10px 2px;font-size:10px;font-family:sans-serif;background:transparent;color:#4a5f75;border:none;cursor:pointer;border-right:.5px solid #1a2438}
+.tab:last-child{border-right:none}
+.tab.on{background:rgba(0,224,150,.06);color:#00e096}
+.sbox{padding:14px 16px;border-radius:10px;background:rgba(0,0,0,.4);display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.cdbox{background:rgba(255,74,0,.06);border-radius:10px;border:.5px solid rgba(255,74,0,.3);padding:1.25rem;text-align:center;margin-bottom:12px;display:none}
+.okbox{background:rgba(0,224,150,.05);border-radius:10px;border:.5px solid rgba(0,224,150,.2);padding:1rem 1.25rem;margin-bottom:12px;display:none}
+.fbtn{padding:14px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;width:100%;border:.5px solid #ff4a00;background:linear-gradient(135deg,#cc3a00,#ff4a00);color:#fff;font-family:sans-serif;margin-bottom:12px;display:none}
+.fbtn:disabled{background:#0d1118;color:#4a5f75;cursor:not-allowed;border-color:#1a2438}
+.bsm{padding:6px 14px;border-radius:6px;font-size:11px;cursor:pointer;border:.5px solid rgba(245,197,66,.4);background:transparent;color:#f5c542;font-family:sans-serif}
+.nurl{background:rgba(255,74,0,.06);border-radius:10px;border:.5px solid rgba(255,74,0,.2);padding:10px 14px;margin-bottom:12px;display:none}
+input,textarea{background:#07090f;border:.5px solid #1a2438;border-radius:8px;color:#dde6f0;font-family:monospace;font-size:12px;padding:9px 12px;width:100%}
+textarea{resize:vertical}
+.lbl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-family:monospace;color:#4a5f75;display:block;margin-bottom:8px}
+.tag{font-size:10px;padding:2px 8px;border-radius:20px;font-family:monospace;white-space:nowrap;display:inline-block;margin:2px}
+img.hi{width:100%;border-radius:8px;border:.5px solid #1a2438;display:none}
+.av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#008751,#f5c542);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="hdr">
+  <div>
+    <div style="display:flex;align-items:center;gap:7px;margin-bottom:4px">
+      <span style="width:7px;height:7px;border-radius:50%;background:#00e096;box-shadow:0 0 8px #00e096;display:inline-block"></span>
+      <span style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#4a5f75;font-family:monospace">BEST LinkedIn Agent v26 &middot; Zapier</span>
+    </div>
+    <h1 style="font-size:17px;font-weight:400;margin:0 0 3px;color:#f0f6ff">Ayodeji Aina &mdash; BEST</h1>
+    <p style="font-size:11px;color:#4a5f75;margin:0;font-family:sans-serif">Lagos, NG &middot; <span id="hdrDay"></span></p>
+  </div>
+  <div style="text-align:right">
+    <p style="font-size:9px;color:#4a5f75;font-family:monospace;margin:0 0 5px" id="hdrKey"></p>
+    <div style="display:flex;gap:5px;justify-content:flex-end">
+      <span class="tag" id="fTag" style="border-color:rgba(245,197,66,.35);color:#f5c542;background:rgba(245,197,66,.09)">PENDING</span>
+      <span class="tag" id="zTag" style="border-color:rgba(255,74,0,.35);color:#ff4a00;background:rgba(255,74,0,.09)">NO URL</span>
+    </div>
+  </div>
+</div>
+
+<div class="tabs" id="tabBar"></div>
+
+<div id="tab-auto">
+  <div class="sbox" id="sBox" style="border-color:#4a5f75">
+    <div class="dot" id="sDot" style="background:#4a5f75"></div>
+    <p style="font-size:13px;margin:0;font-family:sans-serif;font-weight:500;color:#4a5f75" id="sMsg">Starting...</p>
+  </div>
+  <div class="cdbox" id="cdBox">
+    <div style="font-size:60px;font-weight:700;color:#ff4a00;font-family:monospace;line-height:1" id="cdN">5</div>
+    <p style="font-size:12px;color:#7a90a8;font-family:sans-serif;margin:8px 0 14px" id="cdL"></p>
+    <button onclick="cancelAuto()" style="padding:9px 22px;border-radius:8px;border:.5px solid rgba(240,82,82,.4);background:transparent;color:#f05252;font-size:13px;cursor:pointer;font-family:sans-serif">Cancel</button>
+  </div>
+  <div class="okbox" id="okBox">
+    <p style="font-size:13px;color:#00e096;margin:0 0 4px;font-family:sans-serif;font-weight:600">Fired to Zapier!</p>
+    <p style="font-size:11px;color:#4a5f75;margin:0 0 10px;font-family:sans-serif">Check your LinkedIn profile in 30 seconds. Check Zapier run history if it does not appear.</p>
+    <div style="display:flex;gap:8px">
+      <button class="bsm" onclick="forceReFire()">Force Re-Fire</button>
+      <a href="https://zapier.com/app/history" target="_blank" style="font-size:11px;padding:6px 14px;border-radius:6px;border:.5px solid #ff4a00;background:rgba(255,74,0,.08);color:#ff4a00;text-decoration:none;font-family:sans-serif">Zapier History</a>
+    </div>
+  </div>
+  <button class="fbtn" id="fireBtn" onclick="manualFire()">FIRE TO LINKEDIN</button>
+  <div class="nurl" id="nurlBox">
+    <p style="font-size:12px;color:#ff4a00;margin:0 0 3px;font-family:sans-serif;font-weight:500">No Zapier URL set</p>
+    <p style="font-size:11px;color:#4a5f75;margin:0;font-family:sans-serif">Open Credentials tab and paste your Zapier webhook URL.</p>
+  </div>
+  <div class="card">
+    <span class="lbl" id="iLbl">Loading image...</span>
+    <div id="iLd" style="background:#07090f;border-radius:8px;height:50px;display:flex;align-items:center;justify-content:center">
+      <p style="font-size:11px;color:#f5c542;font-family:monospace;margin:0">Pollinations.ai loading...</p>
+    </div>
+    <img class="hi" id="iEl" alt=""/>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <button onclick="newVar()" style="font-size:10px;padding:5px 12px;border-radius:6px;border:.5px solid #1a2438;background:transparent;color:#4a5f75;cursor:pointer;font-family:sans-serif">New variation</button>
+      <a id="iDl" href="#" target="_blank" style="font-size:10px;padding:5px 12px;border-radius:6px;border:.5px solid #00e096;background:rgba(0,224,150,.06);color:#00e096;text-decoration:none;font-family:sans-serif">Download</a>
+    </div>
+  </div>
+  <div class="card">
+    <span class="lbl">Weekly Schedule</span>
+    <div id="schedW" style="display:flex;gap:5px;flex-wrap:wrap"></div>
+  </div>
+</div>
+
+<div id="tab-post" style="display:none">
+  <div class="card" style="overflow:hidden;padding:0;margin-bottom:12px">
+    <div style="padding:1rem 1.25rem;border-bottom:.5px solid #1a2438;display:flex;align-items:center;gap:10px">
+      <div class="av">AA</div>
+      <div style="flex:1">
+        <p style="font-size:13px;font-weight:600;color:#f0f6ff;font-family:sans-serif;margin:0">Ayodeji Aina BEST</p>
+        <p style="font-size:11px;color:#4a5f75;font-family:sans-serif;margin:0" id="pMeta"></p>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button id="eBtn" onclick="toggleEdit()" style="font-size:11px;padding:5px 11px;border-radius:6px;cursor:pointer;border:.5px solid #1a2438;background:transparent;color:#7a90a8;font-family:sans-serif">Edit</button>
+        <button id="cBtn" onclick="copyPost()" style="font-size:11px;padding:5px 12px;border-radius:6px;cursor:pointer;border:.5px solid #1a2438;background:transparent;color:#7a90a8;font-family:sans-serif">Copy</button>
+      </div>
+    </div>
+    <div style="padding:1.25rem">
+      <div id="pPrev"></div>
+      <textarea id="pEdit" style="display:none;min-height:360px;font-family:Georgia,serif;font-size:13px;line-height:1.85"></textarea>
+      <div style="margin-top:10px;padding-top:10px;border-top:.5px solid #1a2438;display:flex;justify-content:space-between;align-items:center">
+        <button onclick="resetPost()" style="font-size:11px;padding:4px 10px;border-radius:5px;border:.5px solid #1a2438;background:transparent;color:#4a5f75;cursor:pointer;font-family:sans-serif">Reset</button>
+        <span id="cCount" style="font-size:11px;font-family:monospace;color:#00e096"></span>
+      </div>
+    </div>
+  </div>
+  <button onclick="manualFire()" style="width:100%;padding:12px;border-radius:8px;border:.5px solid rgba(255,74,0,.3);background:rgba(255,74,0,.08);color:#ff4a00;font-size:13px;font-weight:600;cursor:pointer;font-family:sans-serif">Fire to LinkedIn via Zapier</button>
+</div>
+
+<div id="tab-image" style="display:none">
+  <div class="card" style="background:rgba(0,224,150,.05);border-color:rgba(0,224,150,.15);margin-bottom:12px">
+    <p style="font-size:12px;color:#00e096;margin:0;font-family:sans-serif;font-weight:500">Pollinations.ai &mdash; Free, no API key, auto-generates per topic</p>
+  </div>
+  <div class="card" style="margin-bottom:12px">
+    <span class="lbl">Image Prompt</span>
+    <textarea id="iPin" style="min-height:70px;font-size:12px" oninput="updPrompt()"></textarea>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <button onclick="rstPrompt()" style="font-size:11px;padding:7px 14px;border-radius:6px;border:.5px solid #1a2438;background:transparent;color:#4a5f75;cursor:pointer;font-family:sans-serif">Reset</button>
+      <button onclick="newVar()" style="font-size:11px;padding:7px 14px;border-radius:6px;border:.5px solid #00e096;background:rgba(0,224,150,.07);color:#00e096;cursor:pointer;font-family:sans-serif">Regenerate</button>
+    </div>
+  </div>
+  <div class="card" style="padding:1rem">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <span style="font-size:10px;text-transform:uppercase;color:#00e096;font-family:monospace" id="iTLbl"></span>
+      <a id="iTDl" href="#" target="_blank" style="font-size:11px;padding:5px 12px;border-radius:6px;border:.5px solid #00e096;background:rgba(0,224,150,.07);color:#00e096;text-decoration:none;font-family:sans-serif">Download</a>
+    </div>
+    <div id="iTLd" style="background:#07090f;border-radius:8px;height:80px;display:flex;align-items:center;justify-content:center;margin-bottom:6px">
+      <p style="font-size:11px;color:#f5c542;font-family:monospace;margin:0">Generating...</p>
+    </div>
+    <img class="hi" id="iTEl" alt=""/>
+  </div>
+</div>
+
+<div id="tab-log" style="display:none">
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span class="lbl" style="margin:0">Post History</span>
+      <button onclick="clearLog()" style="font-size:10px;padding:4px 10px;border-radius:6px;border:.5px solid rgba(240,82,82,.3);background:transparent;color:#f05252;cursor:pointer;font-family:sans-serif">Clear</button>
+    </div>
+    <div id="logW"><p style="font-size:13px;color:#4a5f75;font-family:sans-serif;text-align:center;padding:2rem 0">No posts yet.</p></div>
+  </div>
+</div>
+
+<div id="tab-creds" style="display:none">
+  <div style="background:rgba(0,224,150,.06);border-radius:10px;border:.5px solid rgba(0,224,150,.2);padding:10px 14px;display:flex;align-items:center;gap:8px;margin-bottom:10px">
+    <span style="width:7px;height:7px;border-radius:50%;background:#00e096;display:inline-block;flex-shrink:0"></span>
+    <p style="font-size:12px;color:#00e096;margin:0;font-family:sans-serif;font-weight:500">Saved to localStorage automatically</p>
+  </div>
+  <div class="card" style="margin-bottom:10px;border-color:rgba(255,74,0,.3)">
+    <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+      <span class="lbl" style="margin:0;color:#ff4a00">Zapier Webhook URL</span>
+      <span id="uBadge" style="font-size:10px;color:#4a5f75;font-family:monospace">empty</span>
+    </div>
+    <input type="text" id="zIn" placeholder="https://hooks.zapier.com/hooks/catch/..." oninput="saveCreds()"/>
+    <p style="font-size:10px;color:#4a5f75;margin:6px 0 0;font-family:sans-serif">Zapier &rarr; your Zap &rarr; Webhooks trigger &rarr; copy URL here.</p>
+  </div>
+  <div class="card" style="background:rgba(255,74,0,.04);border-color:rgba(255,74,0,.2);margin-bottom:10px">
+    <span class="lbl">Zapier Zap setup</span>
+    <p style="font-size:12px;color:#7a90a8;font-family:sans-serif;line-height:1.8;margin:0">
+      Trigger: Webhooks by Zapier &rarr; Catch Hook<br>
+      Action: LinkedIn &rarr; Create Share Update<br>
+      <strong style="color:#f0f6ff">Share Commentary field = post_text</strong><br>
+      Visibility: Public &mdash; Zap must be ON
+    </p>
+  </div>
+  <button onclick="clearCreds()" style="padding:10px;background:transparent;color:#f05252;border:.5px solid rgba(240,82,82,.3);border-radius:10px;font-size:12px;cursor:pointer;font-family:sans-serif;width:100%">Clear credentials</button>
+</div>
+
+</div>
+<script>
+var DAYS=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+var LI_MAX=3000,AUTO_DELAY=5;
+var TODAY=(function(){var d=new Date().getDay();return d===0?"Sun":DAYS[d-1];})();
+var TODAY_K=(function(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");})();
+var POSTS={
+Mon:{topic:"UI/UX Design",label:"UI/UX Dose",imgPrompt:"Nigerian fintech mobile UI dark minimal professional",body:"Hello BEST Minds. It is Monday and it is UI/UX Dose today.\n\nIn Nigerian fintech, 60% of users drop off before checkout. Not because the product is broken. Because the design makes them think too hard.\n\nCognitive load is the silent conversion killer.\n\nEvery extra tap, every vague label, every misplaced CTA adds friction. Friction creates doubt. Doubt stops action. In a market where trust is already fragile, every second of confusion is a user you lost.\n\nImagine This:\nYou open a mobile banking app in Victoria Island. You want to send N50,000. Four screens. Two confirmations. One timeout. By screen three you are already wondering if the transfer went through. That is not a user problem. That is a design decision someone made and never tested.\n\nThe case in point:\nPaystack stripped their merchant checkout to its core fewer steps, clearer labels, faster confirmation. Measurable lift in conversion. They did not rebrand. They redesigned the decision path.\n\nIf your product is losing users before checkout, the first question is not what to add. It is what to remove.\n\n#UIUXDesign #ProductDesign #NigerianFintech #UserExperience #AfricanTech #InsightToImpact #BESTMinds #moveMore #D2bd"},
+Tue:{topic:"Data Analytics",label:"Data Analytics Dose",imgPrompt:"Data visualization dashboard Lagos business professional dark",body:"Hello BEST Minds. It is Tuesday and it is Data Analytics Dose today.\n\nMost Lagos SMEs are sitting on six months of sales data and still making decisions by gut. That is not boldness. That is expensive guessing.\n\nBusiness intelligence is not a big-company tool anymore. A clean spreadsheet, a Power BI dashboard, and three hours of structured data can tell you which product moves on Fridays, which customer segment disappears in Q3, and where your margin is leaking.\n\nImagine This:\nYou run a retail store in Surulere. January was slow. You assume it is the economy. But your data says something different. Your top 20% of customers have not returned since December. One reactivation campaign could fix that. But you never ran it because you did not know.\n\nThe case in point:\nA mid-size food distributor in Ikeja tracked route performance against sales velocity. Within 90 days they cut two underperforming routes and improved weekly revenue by 23%. No new product. No price change. Just data they already had, finally used.\n\nYour next growth decision is already in your data. The question is whether you are reading it.\n\n#DataAnalytics #BusinessIntelligence #LagosStartups #AfricanData #SMEGrowth #InsightToImpact #BESTMinds #moveMore #D2bd"},
+Wed:{topic:"Geoscience",label:"Geoscience Dose",imgPrompt:"Satellite thermal map Niger Delta professional dark dramatic",body:"Hello BEST Minds. It is Wednesday and it is Geoscience Dose today.\n\nThe Niger Delta holds one of the most studied and most mismanaged environments on the planet. Oil spills, gas flaring, land degradation. The data exists. The satellite imagery exists. What has been missing is the intelligence layer on top.\n\nRemote sensing combined with AI is changing that.\n\nWe can now detect pipeline stress anomalies, map vegetation loss in near real-time, and model spill dispersion before it reaches communities using Sentinel-2 imagery that is freely available.\n\nImagine This:\nA geologist in Port Harcourt opens a monitoring dashboard. It flags a spectral anomaly along a pipeline corridor consistent with hydrocarbon seepage. The alert fires before a single ground crew is deployed. Prevention, not response.\n\nThe case in point:\nNOSDRA, working with satellite monitoring programs, piloted AI-assisted spill detection across the Delta. Early flagging reduced response time and improved legal documentation for remediation.\n\nThe tools exist. The question is whether we are building the capacity to use them.\n\n#Geoscience #NigerDelta #RemoteSensing #EnvironmentalMonitoring #OilAndGas #InsightToImpact #BESTMinds #moveMore #D2bd"},
+Thu:{topic:"Mining",label:"Mining Dose",imgPrompt:"Aerial drone view Nigerian mine at dusk AI analysis overlay dark",body:"Hello BEST Minds. It is Thursday and it is Mining Dose today.\n\nNigeria sits on over 44 solid minerals. Gold, lithium, iron ore across Zamfara, Nasarawa, Niger State. Yet our contribution to global mineral output remains a fraction of our potential.\n\nThe gap is not geological. It is technological.\n\nDrone surveying combined with AI ore mapping is redefining how junior mining companies in Africa prospect and de-risk. What used to take weeks of manual surveys now takes days.\n\nImagine This:\nA mining engineer in Abuja receives drone-captured hyperspectral data from a Zamfara concession. The AI model flags lithium-bearing pegmatite signatures across three zones ranked by grade probability. The team deploys only to the top-ranked site. First drill hits. No wasted capital.\n\nThe case in point:\nA junior exploration company in Nasarawa used drone LiDAR combined with ML classification to identify iron ore zones in under two weeks. Previous cycles had taken three months. They compressed the timeline by 80%.\n\nThe frontier is not underground. It is in the algorithm.\n\n#MiningNigeria #SolidMinerals #DroneMapping #AIExploration #CriticalMinerals #InsightToImpact #BESTMinds #moveMore #D2bd"},
+Fri:{topic:"Marketing",label:"Marketing Dose",imgPrompt:"Vibrant Lagos street scene cinematic warm tones no text",body:"Hello BEST Minds. It is Friday and it is Marketing Dose today.\n\nAfrican consumers do not just buy products. They buy belonging.\n\nBrand loyalty in this market is not built through awareness campaigns. It is built through emotional resonance. The feeling that a brand sees them, reflects them, understands their context. That is not soft marketing. That is the hardest thing to replicate.\n\nImagine This:\nYou are a brand manager in Lagos. Three outdoor campaigns, two influencer deals, a radio push. Sales are flat. Then a competitor drops a 60-second video of a woman in traffic in Ojuelegba. Their product quietly in frame. Three million views in four days. Why? Because it was not an ad. It was recognition.\n\nThe case in point:\nCowbell Milk campaigns did not sell milk. They sold breakfast time as a cultural ritual. The product was secondary. The moment was primary. That positioning has sustained the brand across decades of market pressure.\n\nIf your campaign is not triggering recognition in your audience, you are advertising to strangers.\n\n#MarketingAfrica #BrandStrategy #LagosMarketing #ConsumerInsights #AfricanBrands #InsightToImpact #BESTMinds #moveMore #D2bd"},
+Sat:{topic:"AI & Vibe Coding",label:"AI & Vibe Coding Dose",imgPrompt:"Glowing code editor dark mode Lagos night city neon professional",body:"Hello BEST Minds. It is Saturday and it is AI & Vibe Coding Dose today.\n\nNigerian developers are no longer waiting for permission to build world-class products.\n\nAI pair programming with Claude, Copilot, and Cursor has collapsed the gap between idea and execution. What used to require a senior developer and three sprints can now be prototyped by a solo builder in an afternoon.\n\nVibe coding is not about skipping engineering rigour. It is about redirecting cognitive energy from boilerplate to problem-solving.\n\nImagine This:\nA developer in Lekki has an idea for an automated tenancy management tool. Six months ago she would need a backend team. Tonight she opens Cursor, describes the logic in plain English, iterates with Claude on edge cases, deploys to Netlify before midnight, and gets her first user the next morning.\n\nThe case in point:\nOne Lagos fintech tool was built, tested, and soft-launched in 11 days using AI tooling. The founder had never shipped a product solo before. They proved the barrier was never technical.\n\nYour next product is one conversation away.\n\n#VibeCoding #AITools #NigerianDevelopers #BuildInPublic #AfricanTech #ClaudeAI #InsightToImpact #BESTMinds #moveMore #D2bd"},
+Sun:{topic:"Life & Books",label:"Life & Books Dose",imgPrompt:"Open book warm morning light Lagos skyline window cozy",body:"Hello BEST Minds. It is Sunday and it is Life & Books Dose today.\n\nThe most dangerous trap for ambitious people is not failure. It is busyness mistaken for progress.\n\nWe respond, react, reschedule, repeat. At the end of a packed week we ask: what actually moved? Not what got done. What moved?\n\nMental models from books are not academic exercises. They are decision frameworks. Leaders who read consistently are not doing it for knowledge. They are building a vocabulary for reality that lets them see what others cannot.\n\nImagine This:\nIt is Sunday evening in Gbagada. The week was full. You open a book not for productivity, not for a hustle hack, but for perspective. One paragraph reframes a conversation you have been avoiding for three weeks. One idea shifts how you will lead Monday meeting. You did not grind your way to that insight. You rested into it.\n\nThe case in point:\nCharlie Munger built Berkshire mental architecture on cross-disciplinary reading. Ngozi Okonjo-Iweala has cited books across economics, anthropology, and policy as central to her decision-making. They built mental leverage.\n\nRest is not the opposite of progress. It is the condition for it.\n\n#MentalModels #Leadership #AfricanLeaders #ReadingList #PersonalDevelopment #SundayReset #InsightToImpact #BESTMinds #moveMore #D2bd"}
+};
+var HOOKS={
+Mon:["Stop designing screens.\nDesign decisions.","Your user is confused?\nYour UI is.","Good design is not seen.\nBad design is felt."],
+Tue:["The numbers are not lying.\nYou just cannot hear them yet.","Gut feeling built your business.\nData will grow it.","You have the data.\nYou are just not asking it questions."],
+Wed:["The Earth has been recording.\nWe are just learning to read it.","Every satellite pass is evidence.\nAre we using it?","The ground does not lie.\nOur tools just were not good enough."],
+Thu:["Forget the hammer.\nThink the algorithm.","44 minerals.\nOne tech gap.","The richest ground in Africa.\nStill mapped by hand."],
+Fri:["Stop advertising.\nStart activating.","Reach is rented.\nResonance is owned.","Your audience does not want your product.\nThey want to feel seen."],
+Sat:["Your IDE is waiting.\nThe future ships itself.","Solo founder.\nAI team.","The barrier was never technical.\nProve it tonight."],
+Sun:["Everything urgent fades.\nOnly what you built remains.","The busiest people read the least.\nThat is not coincidence.","Rest is not the opposite of progress.\nIt is the condition for it."]
+};
+var cur=POSTS[TODAY]||POSTS.Thu;
+function weekV(){return Math.floor(new Date().getTime()/(7*24*3600*1000))%3;}
+function nowWAT(){return new Date().toLocaleString("en-GB",{timeZone:"Africa/Lagos"})+" WAT";}
+function buildPost(day){var p=POSTS[day]||POSTS.Thu,h=HOOKS[day]||HOOKS.Fri;return(h[weekV()]||h[0])+"\n\n"+p.body;}
+function imgSrc(p,s){return "https://image.pollinations.ai/prompt/"+encodeURIComponent(p+" LinkedIn hero 16:9 Nigerian professional no text.")+"?width=1200&height=628&nologo=true&seed="+(s||42)+"&model=flux";}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+var ST={post:"",zapUrl:"",fired:false,sending:false,cd:-1,cancelled:false,editing:false,imgSeed:Math.floor(Math.abs(Math.sin(new Date().getDate()*9301))*99999),imgPrompt:cur.imgPrompt||cur.topic,history:[],t:null};
+function saveState(){try{localStorage.setItem("best-v26",JSON.stringify({zapUrl:ST.zapUrl,history:ST.history.slice(0,30),fired:ST.fired}));}catch(e){}}
+function loadState(){try{var s=JSON.parse(localStorage.getItem("best-v26")||"{}");if(s.zapUrl)ST.zapUrl=s.zapUrl;if(s.history)ST.history=s.history;if(s.fired)ST.fired=s.fired;}catch(e){}}
+function sc(t){return t==="success"?"#00e096":t==="error"?"#f05252":t==="loading"?"#f5c542":"#4a5f75";}
+function setStatus(type,msg){var c=sc(type);document.getElementById("sBox").style.borderColor=c;document.getElementById("sDot").style.background=c;document.getElementById("sDot").style.boxShadow=type==="loading"?"0 0 8px "+c:"none";document.getElementById("sMsg").style.color=c;document.getElementById("sMsg").textContent=msg;}
+function setFiredUI(){document.getElementById("fTag").textContent="POSTED";document.getElementById("fTag").style.color="#00e096";document.getElementById("fTag").style.borderColor="rgba(0,224,150,.35)";document.getElementById("fTag").style.background="rgba(0,224,150,.09)";document.getElementById("okBox").style.display="block";document.getElementById("fireBtn").style.display="none";document.getElementById("cdBox").style.display="none";document.getElementById("nurlBox").style.display="none";}
+function startCountdown(){ST.cancelled=false;ST.cd=AUTO_DELAY;document.getElementById("cdBox").style.display="block";document.getElementById("cdL").textContent=cur.label+" to LinkedIn via Zapier";document.getElementById("fireBtn").style.display="none";setStatus("loading","Auto-firing in "+AUTO_DELAY+"s...");tick();}
+function tick(){if(ST.cancelled)return;document.getElementById("cdN").textContent=ST.cd;setStatus("loading","Auto-firing in "+ST.cd+"s...");if(ST.cd<=0){document.getElementById("cdBox").style.display="none";execFire();return;}ST.cd--;ST.t=setTimeout(tick,1000);}
+function cancelAuto(){ST.cancelled=true;if(ST.t)clearTimeout(ST.t);document.getElementById("cdBox").style.display="none";document.getElementById("fireBtn").style.display="block";setStatus("idle","Cancelled. Click Fire when ready.");}
+function manualFire(){execFire();}
+function forceReFire(){ST.fired=false;ST.history=ST.history.filter(function(h){return h.date!==TODAY_K;});saveState();document.getElementById("okBox").style.display="none";document.getElementById("fTag").textContent="PENDING";document.getElementById("fTag").style.color="#f5c542";document.getElementById("fTag").style.borderColor="rgba(245,197,66,.35)";execFire();}
+function execFire(){
+var text=ST.post;
+if(!ST.zapUrl){setStatus("error","No Zapier URL. Open Credentials tab.");return;}
+if(text.length>LI_MAX){setStatus("error","Post too long: "+text.length+" / "+LI_MAX);return;}
+ST.sending=true;setStatus("loading","Firing to Zapier...");document.getElementById("fireBtn").disabled=true;
+var ts=nowWAT(),wc=text.trim().split(/\s+/).filter(function(x){return x;}).length;
+var payload={post_text:text,comment:text,topic:cur.topic,day:TODAY,label:cur.label,char_count:text.length,word_count:wc,timestamp:ts};
+// Calls /api/fire Netlify serverless function (server-side) - bypasses CORS
+fetch("/api/fire",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({zapUrl:ST.zapUrl.trim(),payload:payload})})
+.then(function(r){return r.json();})
+.then(function(data){
+ST.sending=false;document.getElementById("fireBtn").disabled=false;
+if(data.ok){
+ST.fired=true;setFiredUI();setStatus("success","Fired to Zapier (HTTP "+data.status+")! Check LinkedIn in 30 seconds.");
+var e={date:TODAY_K,day:TODAY,topic:cur.topic,label:cur.label,posted:true,firedAt:ts,words:wc,chars:text.length,via:"Netlify proxy"};
+ST.history=[e].concat(ST.history.filter(function(h){return h.date!==TODAY_K;}));saveState();renderLog();renderSched();
+}else{document.getElementById("fireBtn").style.display="block";setStatus("error","Zapier error: "+(data.error||"HTTP "+data.status)+". Check Zap is ON.");}
+})
+.catch(function(err){ST.sending=false;document.getElementById("fireBtn").disabled=false;document.getElementById("fireBtn").style.display="block";setStatus("error","Failed: "+err.message);});
+}
+function loadImg(){
+var src=imgSrc(ST.imgPrompt,ST.imgSeed);
+var el=document.getElementById("iEl"),ld=document.getElementById("iLd"),te=document.getElementById("iTEl"),tl=document.getElementById("iTLd");
+document.getElementById("iLbl").textContent=cur.topic+" Image";document.getElementById("iDl").href=src;document.getElementById("iTDl").href=src;document.getElementById("iTLbl").textContent=cur.topic+" "+TODAY;
+el.style.display="none";ld.style.display="flex";te.style.display="none";if(tl)tl.style.display="flex";
+el.src=src;te.src=src;
+el.onload=function(){el.style.display="block";ld.style.display="none";};
+el.onerror=function(){ld.style.display="none";};
+te.onload=function(){te.style.display="block";if(tl)tl.style.display="none";};
+document.getElementById("iPin").value=ST.imgPrompt;
+}
+function newVar(){ST.imgSeed=Math.floor(Math.random()*99999);loadImg();}
+function updPrompt(){ST.imgPrompt=document.getElementById("iPin").value||cur.imgPrompt||cur.topic;loadImg();}
+function rstPrompt(){ST.imgPrompt=cur.imgPrompt||cur.topic;loadImg();}
+function renderPost(){
+var text=ST.post,lines=text.split("\n");
+var h=lines.map(function(l,i){if(!l.trim())return "<div style='height:8px'></div>";var isH=i<2,isT=l.charAt(0)==="#";return "<p style='margin:0;line-height:1.85;font-size:"+(isH?"15":"13")+"px;color:"+(isH?"#f0f6ff":isT?"#00e096":"#dde6f0")+";font-family:"+(isH?"Georgia,serif":"sans-serif")+";font-style:"+(isH?"italic":"normal")+"'>"+esc(l)+"</p>";}).join("");
+document.getElementById("pPrev").innerHTML=h;document.getElementById("pEdit").value=ST.post;
+var n=text.length;document.getElementById("cCount").textContent=n.toLocaleString()+" / "+LI_MAX.toLocaleString();document.getElementById("cCount").style.color=n>LI_MAX?"#f05252":n>2700?"#f5c542":"#00e096";
+document.getElementById("pMeta").textContent=TODAY+" "+cur.topic+" "+n+" chars";
+}
+function toggleEdit(){ST.editing=!ST.editing;var btn=document.getElementById("eBtn");if(ST.editing){btn.textContent="Done";btn.style.color="#00e096";document.getElementById("pPrev").style.display="none";document.getElementById("pEdit").style.display="block";}else{ST.post=document.getElementById("pEdit").value;btn.textContent="Edit";btn.style.color="#7a90a8";document.getElementById("pPrev").style.display="block";document.getElementById("pEdit").style.display="none";renderPost();}}
+function resetPost(){ST.post=buildPost(TODAY);renderPost();if(ST.editing)toggleEdit();}
+function copyPost(){navigator.clipboard.writeText(ST.post);var b=document.getElementById("cBtn");b.textContent="Copied";b.style.color="#00e096";setTimeout(function(){b.textContent="Copy";b.style.color="#7a90a8";},2000);}
+function renderSched(){
+document.getElementById("schedW").innerHTML=DAYS.map(function(d){var p=POSTS[d]||POSTS.Thu,isT=d===TODAY,was=ST.history.some(function(x){return x.day===d&&x.posted;});return "<div style='flex:0 0 auto;padding:6px 10px;border-radius:8px;background:"+(isT?"rgba(255,74,0,.08)":"#0d1118")+";border:.5px solid "+(isT?"#ff4a00":"#1a2438")+";text-align:center;min-width:52px'><div style='font-size:9px;color:"+(isT?"#ff4a00":"#4a5f75")+";font-family:monospace;margin-bottom:2px'>"+d+(isT?" o":"")+"</div><div style='font-size:9px;color:"+(isT?"#f0f6ff":"#7a90a8")+";font-family:sans-serif'>"+p.topic.split(" ")[0]+"</div>"+(was?"<div style='font-size:8px;color:#00e096;font-family:monospace'>done</div>":"")+"</div>";}).join("");
+}
+function renderLog(){
+if(!ST.history.length){document.getElementById("logW").innerHTML="<p style='font-size:13px;color:#4a5f75;font-family:sans-serif;text-align:center;padding:2rem 0'>No posts yet.</p>";return;}
+document.getElementById("logW").innerHTML=ST.history.slice(0,30).map(function(h){return "<div style='padding:10px 0;border-bottom:.5px solid #1a2438'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:5px'><span style='font-size:13px;color:#f0f6ff;font-family:sans-serif;font-weight:500'>"+(h.topic||"Post")+"</span><span style='font-size:10px;color:#4a5f75;font-family:monospace'>"+h.date+"</span></div><div><span class='tag' style='border-color:rgba(245,197,66,.35);color:#f5c542;background:rgba(245,197,66,.09)'>"+h.day+"</span>"+(h.via?"<span class='tag' style='border-color:rgba(255,74,0,.35);color:#ff4a00;background:rgba(255,74,0,.09)'>"+h.via+"</span>":"")+"<span class='tag' style='border-color:rgba(0,224,150,.35);color:#00e096;background:rgba(0,224,150,.09)'>"+(h.posted?"sent":"draft")+"</span>"+(h.words?"<span class='tag' style='border-color:rgba(74,95,117,.35);color:#4a5f75;background:rgba(74,95,117,.09)'>"+h.words+"w</span>":"")+"</div></div>";}).join("");
+}
+function clearLog(){ST.history=[];ST.fired=false;saveState();renderLog();renderSched();document.getElementById("fTag").textContent="PENDING";document.getElementById("fTag").style.color="#f5c542";document.getElementById("okBox").style.display="none";document.getElementById("fireBtn").style.display="block";}
+var TABS=["auto","post","image","log","creds"],TLBL=["Auto","Post","Image","Log","Creds"];
+function buildTabs(){document.getElementById("tabBar").innerHTML=TABS.map(function(id,i){return "<button class='tab"+(id==="auto"?" on":"")+"' onclick='showTab(\""+id+"\")'>"+TLBL[i]+"</button>";}).join("");}
+function showTab(id){TABS.forEach(function(t){document.getElementById("tab-"+t).style.display=t===id?"block":"none";});document.querySelectorAll(".tab").forEach(function(b,i){b.classList.toggle("on",TABS[i]===id);});var l=document.querySelectorAll(".tab")[3];if(l)l.textContent=ST.history.length?"Log("+ST.history.length+")":"Log";}
+function saveCreds(){ST.zapUrl=document.getElementById("zIn").value.trim();saveState();document.getElementById("uBadge").textContent=ST.zapUrl?"Saved":"empty";document.getElementById("zTag").textContent=ST.zapUrl?"ZAP ON":"NO URL";if(ST.zapUrl&&!ST.fired&&ST.cd<0){document.getElementById("nurlBox").style.display="none";document.getElementById("fireBtn").style.display="block";}}
+function clearCreds(){ST.zapUrl="";localStorage.removeItem("best-v26");document.getElementById("zIn").value="";document.getElementById("uBadge").textContent="empty";document.getElementById("zTag").textContent="NO URL";}
+window.onload=function(){
+loadState();ST.post=buildPost(TODAY);
+document.getElementById("hdrDay").textContent=TODAY+" "+cur.label;
+document.getElementById("hdrKey").textContent=TODAY_K;
+buildTabs();renderPost();renderSched();renderLog();loadImg();
+if(ST.zapUrl){document.getElementById("zIn").value=ST.zapUrl;document.getElementById("uBadge").textContent="Saved";document.getElementById("zTag").textContent="ZAP ON";}
+var already=ST.history.some(function(h){return h.date===TODAY_K&&h.posted;});
+if(already){ST.fired=true;setFiredUI();setStatus("success","Already posted today ("+TODAY_K+"). Check LinkedIn. Force Re-Fire if needed.");}
+else if(!ST.zapUrl){setStatus("idle","Paste your Zapier webhook URL in Credentials tab.");document.getElementById("nurlBox").style.display="block";}
+else{startCountdown();}
+};
+</script>
+</body>
+</html>
