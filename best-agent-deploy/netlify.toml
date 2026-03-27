@@ -1,8 +1,0 @@
-[build]
-  publish = "public"
-  functions = "netlify/functions"
-
-[[redirects]]
-  from = "/api/fire"
-  to = "/.netlify/functions/fire"
-  status = 200
